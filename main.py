@@ -1,18 +1,11 @@
-import chromadb
-import uuid
+from db.vectorstores import vector_db
+from agent import my_agent, result
 
-client = chromadb.Client()
+def main():
+    print(result.final_output)
 
-collection = client.create_collection(name="exam_info")
+if __name__ == "__main__":
+    main()
 
-with open("clues.txt", "r", encoding="utf-8") as text:
-    content = text.read().splitlines()
-
-collection.upsert(
-    ids=[str(uuid.uuid4()) for _ in content],
-    documents=content, 
-    metadatas=[{"line": line} for line in range(len(content))]
-)
-
-print(collection.peek())
+    
 

@@ -2,7 +2,6 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled
-import asyncio
 
 set_tracing_disabled(True)
 
@@ -20,16 +19,10 @@ model = OpenAIChatCompletionsModel(
     openai_client=client
 )
 
-async def main():
-    my_agent = Agent(
+my_agent: Agent = Agent(
     name="Openai Assistant",
     model=model, 
     instructions="You are a helpful assistant"
-    )
+)
 
-    result = await Runner.run(my_agent, input="What's the capital of France?")
-    print(result.final_output)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+result = Runner.run_sync(my_agent, "What is the capital of France?")
