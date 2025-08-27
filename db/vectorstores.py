@@ -6,7 +6,7 @@ client = chromadb.Client()
 collection = client.create_collection(name="exam_info")
 
 def vector_db():
-    with open("clues.txt", "r", encoding="utf-8") as text:
+    with open("exams.txt", "r", encoding="utf-8") as text:
         content = text.read().splitlines()
 
     collection.upsert(
