@@ -2,6 +2,7 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled
+from db.vectorstores import vector_db 
 
 set_tracing_disabled(True)
 
@@ -21,7 +22,8 @@ model = OpenAIChatCompletionsModel(
 
 my_agent: Agent = Agent(
     name="Openai Assistant",
-    model=model, 
+    model=model,
+    tools=["vector_db"] 
     instructions="You are a helpful assistant"
 )
 
